@@ -1,201 +1,499 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Apexyn — GPT Automation for Real Estate & E‑commerce</title>
-  <meta name="description" content="Apexyn builds premium GPT automations for real estate and e‑commerce. Fast, precise, revenue‑focused." />
+  <title>Apexyn Automation Studio — Real Estate & E‑commerce</title>
+  <meta name="description" content="Neon‑grid landing for Apexyn’s GPT automations in Real Estate & E‑commerce. Single‑file, plug‑and‑play." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg: #0b0b12;
-      --card: #0f0f19;
-      --muted: #a2a8bd;
-      --text: #f5f7ff;
-      --primary-1: #6d28d9; /* purple-700 */
-      --primary-2: #a855f7; /* purple-500 */
-      --primary-3: #c084fc; /* purple-400 */
-      --ring: rgba(168,85,247,.45);
-      --grid: rgba(255,255,255,0.06);
-      --glow: rgba(168,85,247,.35);
+      /* === BRAND: tweak these two to match your logo gradient === */
+      --brand-1:#8b5cf6;   /* neon purple */
+      --brand-2:#06b6d4;   /* cyan */
+      --brand-3:#a78bfa;   /* soft accent */
+      --bg:#0a0a0f;
+      --fg:#e6e6f0;
+      --muted:#9aa0b4;
+      --card:#0f1020;
+      --border:#23243b;
+      --glow: drop-shadow(0 0 18px rgba(139,92,246,.55)) drop-shadow(0 0 40px rgba(6,182,212,.35));
     }
+
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
-      margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color:var(--text); background: radial-gradient(1200px 800px at 80% -10%, rgba(168,85,247,.22), transparent 60%),
-                         radial-gradient(1000px 700px at -10% 30%, rgba(109,40,217,.18), transparent 55%),
-                         var(--bg);
+      margin:0;background:radial-gradient(1200px 800px at 80% -10%, rgba(139,92,246,.18), transparent 60%),
+      radial-gradient(800px 600px at 10% 110%, rgba(6,182,212,.15), transparent 60%), var(--bg);
+      color:var(--fg);font-family:'Inter',system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
       overflow-x:hidden;
     }
+
+    /* === Neon grid background === */
+    .grid-bg{position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.6;}
+    .grid-bg::before{content:"";position:absolute;inset:-200vh; background:
+      repeating-linear-gradient( to right, rgba(255,255,255,.06) 0 1px, transparent 1px 100px),
+      repeating-linear-gradient( to bottom, rgba(255,255,255,.06) 0 1px, transparent 1px 100px);
+      transform: perspective(700px) rotateX(60deg) translateY(30vh);
+      filter: drop-shadow(0 0 15px rgba(139,92,246,.35)) drop-shadow(0 0 30px rgba(6,182,212,.25));
+    }
+
+    /* Cursor reactive glow */
+    .cursor-glow{position:fixed;inset:-10%; pointer-events:none; z-index:0;}
+    .cursor-glow::before{
+      content:""; position:absolute; width:42vmax; height:42vmax; border-radius:50%;
+      left:var(--mx,50%); top:var(--my,40%); transform:translate(-50%,-50%);
+      background:radial-gradient(closest-side, rgba(139,92,246,.20), rgba(6,182,212,.12), transparent 70%);
+      filter: blur(30px);
+    }
+
     a{color:inherit; text-decoration:none}
+    .container{width:min(1200px,92vw); margin-inline:auto}
+    .pill{display:inline-flex; gap:.6rem; align-items:center; padding:.4rem .7rem; border:1px solid var(--border); border-radius:999px; background:rgba(255,255,255,.02)}
+    .brand-gradient{background:linear-gradient(90deg,var(--brand-1),var(--brand-2)); -webkit-background-clip:text; background-clip:text; color:transparent; filter: var(--glow)}
 
-    /* ====== Grid background ====== */
-    .grid-wrap{
-      position:fixed; inset:0; pointer-events:none; z-index:0;
-      mask-image: radial-gradient(60% 60% at 50% 40%, black 40%, transparent 100%);
-    }
-    .grid{
-      position:absolute; inset:0; display:grid; grid-template-columns: repeat(40, 1fr);
-      grid-template-rows: repeat(24, 1fr);
-    }
-    .cell{ outline:1px solid var(--grid); }
+    header{position:sticky; top:0; z-index:50; backdrop-filter: blur(8px); background:rgba(10,10,15,.55); border-bottom:1px solid rgba(255,255,255,.06)}
+    .nav{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
+    .logo{display:flex; align-items:center; gap:.8rem}
+    .logo img{width:30px; height:30px; border-radius:6px; filter:var(--glow)}
+    .logo span{font-weight:800; letter-spacing:.4px}
+    .nav a.btn{padding:.6rem .9rem; border:1px solid var(--border); border-radius:12px}
+    .btn-primary{background:linear-gradient(90deg,var(--brand-1),var(--brand-2)); color:#0a0a0f; font-weight:700}
 
-    /* Hover/cursor glow */
-    .cursor-glow{
-      position:fixed; inset:0; pointer-events:none; z-index:1;
-      background: radial-gradient(180px 180px at var(--mx, -100px) var(--my, -100px), var(--glow), transparent 60%),
-                  radial-gradient(450px 450px at var(--mx, -100px) var(--my, -100px), rgba(109,40,217,.18), transparent 65%);
-      transition: background-position .08s linear;
-    }
+    /* Hero */
+    .hero{position:relative; padding:80px 0 40px}
+    .hero h1{font-size: clamp(2rem, 3.5vw + .8rem, 4.2rem); line-height:1.05; margin:14px 0}
+    .hero p{color:var(--muted); font-size: clamp(1rem, .8vw + .6rem, 1.25rem)}
+    .hero .cta{display:flex; gap:12px; margin-top:22px; flex-wrap:wrap}
+    .hero .cta .btn{padding:12px 16px; border-radius:12px; border:1px solid var(--border); background:#111328}
 
-    /* ====== Layout ====== */
-    .container{ position:relative; z-index:2; max-width:1100px; margin:0 auto; padding:28px 20px 96px; }
-    header{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding:8px 0 24px; }
-    .logo{ display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:.3px; }
-    .logo-badge{
-      width:32px; height:32px; border-radius:10px;
-      background: conic-gradient(from 140deg, var(--primary-2), var(--primary-1));
-      box-shadow: 0 0 24px rgba(168,85,247,.45);
-    }
-    .nav{ display:flex; gap:18px; opacity:.9; }
-    .btn{ display:inline-flex; align-items:center; gap:10px; padding:10px 16px; border-radius:999px; border:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.02); color:var(--text); font-weight:600; cursor:pointer; transition:.2s ease;
-      box-shadow: 0 0 0 0 rgba(168,85,247,0);
-    }
-    .btn:hover{ transform:translateY(-1px); border-color:rgba(255,255,255,.16) }
-    .btn.primary{ background:linear-gradient(90deg, var(--primary-1), var(--primary-2)); border-color:transparent }
+    .badges{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
 
-    /* ====== Hero ====== */
-    .hero{ display:grid; grid-template-columns:1.15fr .85fr; gap:28px; align-items:center; padding-top:36px; }
-    .eyebrow{ display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; background:rgba(109,40,217,.15); border:1px solid rgba(168,85,247,.25); color:#e9d5ff; font-weight:600; letter-spacing:.2px; }
-    h1{ font-size: clamp(32px, 3.6vw + 10px, 64px); line-height:1.06; margin:14px 0 10px; }
-    .gradient{ background: linear-gradient(90deg, #e9d5ff, #c084fc, #a855f7); -webkit-background-clip:text; background-clip:text; color:transparent; }
-    .sub{ color:var(--muted); font-size: clamp(15px, 1.1vw + 8px, 18px); max-width:52ch }
+    /* Cards */
+    .grid{display:grid; gap:18px}
+    .cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    @media (max-width: 980px){ .cols-3{grid-template-columns:1fr 1fr} }
+    @media (max-width: 720px){ .cols-3,.cols-2{grid-template-columns:1fr} }
 
-    .capture{ display:flex; gap:10px; margin:26px 0 8px; flex-wrap:wrap }
-    .input{
-      flex:1 1 260px; min-width:240px; padding:14px 16px; border-radius:14px; border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.02); color:var(--text); outline:none; font-size:16px;
-      transition:border-color .15s ease, box-shadow .15s ease, background .2s ease;
-      box-shadow: 0 0 0 0 rgba(168,85,247,0);
-    }
-    .input::placeholder{ color:#9aa0b5 }
-    .input:focus{ border-color: var(--primary-3); box-shadow: 0 0 0 6px var(--ring); background: rgba(168,85,247,.07) }
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.0)); border:1px solid var(--border); border-radius:16px; padding:18px; position:relative; overflow:hidden}
+    .card:hover{border-color:rgba(167,139,250,.5)}
+    .card::after{content:""; position:absolute; inset:-1px; border-radius:16px; padding:1px; background:linear-gradient(120deg, transparent, rgba(139,92,246,.35), rgba(6,182,212,.35), transparent); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity:.0; transition:opacity .3s}
+    .card:hover::after{opacity:1}
 
-    .hero-card{ background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08); border-radius:20px; padding:18px; display:grid; gap:14px }
-    .hero-card .row{ display:flex; align-items:center; gap:12px }
-    .dot{ width:8px; height:8px; border-radius:50%; background: var(--primary-2); box-shadow:0 0 12px var(--primary-2) }
-    .mini{ color:var(--muted); font-size:14px }
+    .card h3{margin:.2rem 0 .4rem 0}
+    .muted{color:var(--muted)}
 
-    /* ====== Features ====== */
-    .features{ margin-top:64px; display:grid; grid-template-columns: repeat(3, 1fr); gap:18px }
-    .feat{ background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:18px }
-    .feat h3{ margin:8px 0 6px }
-    .feat p{ color:var(--muted); margin:0 }
+    /* Tabs for Sample Queries */
+    .tabs{display:flex; gap:8px; margin:18px 0}
+    .tab{padding:.55rem .9rem; border:1px solid var(--border); border-radius:999px; background:#0f1020; cursor:pointer}
+    .tab.active{background:linear-gradient(90deg,var(--brand-1),var(--brand-2)); color:#081018; font-weight:700}
 
-    footer{ margin-top:64px; display:flex; align-items:center; justify-content:space-between; gap:16px; color:#9aa0b5; border-top:1px solid rgba(255,255,255,.06); padding-top:18px }
+    /* Demo chat widgets */
+    .chat{display:flex; flex-direction:column; gap:10px}
+    .chat-box{height:260px; overflow:auto; background:#0b0c1a; border:1px solid var(--border); border-radius:14px; padding:12px}
+    .msg{padding:10px 12px; border-radius:12px; margin:6px 0; max-width:88%}
+    .bot{background:linear-gradient(180deg, rgba(139,92,246,.15), rgba(6,182,212,.15)); border:1px solid rgba(167,139,250,.35)}
+    .user{background:#181a2e; border:1px solid #2a2d52; margin-left:auto}
+    .chat-controls{display:flex; gap:8px}
+    .chat-controls input{flex:1; padding:12px; background:#0f1020; border:1px solid var(--border); border-radius:12px; color:var(--fg)}
+    .chat-controls button{padding:12px 14px; border-radius:12px; border:1px solid var(--border); background:linear-gradient(90deg,var(--brand-1),var(--brand-2)); color:#081018; font-weight:700}
 
-    /* ====== Responsive ====== */
-    @media (max-width: 940px){ .hero{ grid-template-columns:1fr; } }
-    @media (max-width: 720px){ .features{ grid-template-columns:1fr; } header .nav{ display:none } }
+    /* Pricing */
+    .pricing .price{font-size:2rem; font-weight:800}
+
+    /* Forms */
+    form .row{display:grid; gap:12px; grid-template-columns:repeat(2,minmax(0,1fr))}
+    @media (max-width: 720px){ form .row{grid-template-columns:1fr} }
+    input, select, textarea{width:100%; padding:12px 14px; border-radius:12px; border:1px solid var(--border); background:#0f1020; color:var(--fg)}
+    textarea{min-height:140px}
+
+    footer{border-top:1px solid rgba(255,255,255,.06); padding:26px 0; color:var(--muted)}
   </style>
 </head>
 <body>
-  <!-- Background grid & glow layers -->
-  <div class="grid-wrap" aria-hidden="true">
-    <div class="grid" id="grid"></div>
-  </div>
-  <div class="cursor-glow" id="glow" aria-hidden="true"></div>
+  <div class="grid-bg"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
 
-  <div class="container">
-    <header>
-      <div class="logo">
-        <div class="logo-badge"></div>
-        <span>Apexyn</span>
-      </div>
-      <nav class="nav">
-        <a href="#features">Features</a>
-        <a href="#work">Work</a>
-        <a href="#contact">Contact</a>
+  <header>
+    <div class="container nav">
+      <a class="logo" href="#top">
+        <!-- Use your repo's logo.png (inherits the glow) -->
+        <img alt="Apexyn logo" src="logo.png" />
+        <span class="brand-gradient" style="font-size:1.05rem">Apexyn</span>
+      </a>
+      <nav style="display:flex; gap:10px; align-items:center">
+        <a href="#solutions" class="btn">Solutions</a>
+        <a href="#pain" class="btn">Agent Pain Points</a>
+        <a href="#demos" class="btn">Live Demos</a>
+        <a href="#pricing" class="btn">Pricing</a>
+        <a href="#contact" class="btn btn-primary">Get Proposal</a>
       </nav>
-      <a class="btn primary" href="#contact">Get a demo</a>
-    </header>
+    </div>
+  </header>
 
-    <section class="hero">
-      <div>
-        <span class="eyebrow">Premium GPT Automations</span>
-        <h1>Close more deals with <span class="gradient">fine‑tuned, on‑brand AI</span>.</h1>
-        <p class="sub">We build high‑precision GPT bots for real estate and e‑commerce that answer listings, qualify leads, and sync into your CRM. Not toys — revenue tools.</p>
+  <!-- HERO -->
+  <section class="hero container">
+    <span class="pill"><span style="width:8px; height:8px; border-radius:50%; background:var(--brand-2); box-shadow:0 0 12px var(--brand-2)"></span> GPT Automations for Real Estate & E‑commerce</span>
+    <h1 class="brand-gradient">Turn leads into revenue with fine‑tuned GPT agents</h1>
+    <p>We build domain‑trained copilots that answer buyer questions, qualify leads, craft high‑converting product content, and automate ops. Neon‑clean UI. Ruthless delivery speed.</p>
+    <div class="cta">
+      <a href="#demos" class="btn btn-primary">Try Live Demos</a>
+      <a href="#pricing" class="btn">See Pricing</a>
+      <a href="#contact" class="btn">Book a 15‑min Fit Call</a>
+    </div>
+    <div class="badges">
+      <span class="pill">Avg reply <strong>1.2s</strong></span>
+      <span class="pill">24/7 lead capture</span>
+      <span class="pill">CRM + WhatsApp ready</span>
+    </div>
+  </section>
 
-        <form class="capture" onsubmit="return submitLead(event)">
-          <input class="input" id="email" type="email" placeholder="Work email" required />
-          <button class="btn primary" type="submit">Request demo</button>
-        </form>
-        <div class="mini">No spam. We’ll reply within 1 business day.</div>
+  <!-- PAIN POINTS / WHY US -->
+  <section id="pain" class="container" style="padding:18px 0 6px">
+    <div class="grid cols-2">
+      <div class="card">
+        <h3 class="brand-gradient" style="font-size:1.4rem">Top agent pain points (we crush these)</h3>
+        <ul class="muted" style="margin:10px 0 0 18px">
+          <li>Leads ghost after first contact → no structured follow‑ups.</li>
+          <li>Agents waste hours answering repetitive listing questions.</li>
+          <li>Slow response on nights/weekends → lost deals to faster competitors.</li>
+          <li>Messy data: inquiries scattered across WhatsApp, email, portals.</li>
+          <li>No qualification → tours with low‑intent, low‑budget buyers.</li>
+          <li>No analytics on why deals stall (pricing, amenity gaps, paperwork).</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 class="brand-gradient" style="font-size:1.4rem">Why Apexyn wins</h3>
+        <ul class="muted" style="margin:10px 0 0 18px">
+          <li><strong>Fine‑tuned on your stock + tone</strong> so replies feel on‑brand.</li>
+          <li><strong>Lead scoring</strong> with budget/intent/timeline heuristics.</li>
+          <li><strong>Omnichannel</strong>: web widget, WhatsApp, email, and SMS.</li>
+          <li><strong>CRM sync</strong>: HubSpot, Pipedrive, Zoho. Tours auto‑scheduled.</li>
+          <li><strong>Guardrails</strong>: compliance prompts + approval checks.</li>
+          <li><strong>Launch in days</strong>, not months. We handle data, evals, and tuning.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUTIONS -->
+  <section id="solutions" class="container" style="padding:36px 0 14px">
+    <div class="grid cols-2">
+      <div class="card">
+        <h3 class="brand-gradient" style="font-size:1.4rem">Real Estate Automations</h3>
+        <p class="muted">For brokerages, developers, and portals.</p>
+        <div class="grid cols-2" style="margin-top:12px">
+          <div class="card">
+            <h4>Listing Q&A Copilot</h4>
+            <p class="muted">Answers specs, locality, RERA, floor plans, mortgage, and schedules tours.</p>
+          </div>
+          <div class="card">
+            <h4>Lead Qualifier</h4>
+            <p class="muted">Screens budget, intent, timeline → pushes qualified leads to CRM.</p>
+          </div>
+          <div class="card">
+            <h4>Follow‑up Drip</h4>
+            <p class="muted">WhatsApp + email sequences for no‑shows and warm leads.</p>
+          </div>
+          <div class="card">
+            <h4>Docs Copilot</h4>
+            <p class="muted">Auto‑draft LOIs, term sheets, and site‑visit summaries.</p>
+          </div>
+        </div>
       </div>
 
-      <div class="hero-card">
-        <div class="row"><span class="dot"></span> <strong>Listing Q&A</strong> extracted from your own data</div>
-        <div class="row"><span class="dot"></span> <strong>Lead scoring</strong> with property‑fit heuristics</div>
-        <div class="row"><span class="dot"></span> <strong>Omnichannel</strong> (web, WhatsApp, email)</div>
-        <div class="row"><span class="dot"></span> <strong>CRM sync</strong> (HubSpot, Pipedrive)</div>
+      <div class="card">
+        <h3 class="brand-gradient" style="font-size:1.4rem">E‑commerce Automations</h3>
+        <p class="muted">For D2C brands and marketplaces.</p>
+        <div class="grid cols-2" style="margin-top:12px">
+          <div class="card">
+            <h4>Conversion Copilot</h4>
+            <p class="muted">Guides shoppers, compares SKUs, and removes purchase friction.</p>
+          </div>
+          <div class="card">
+            <h4>Support Deflection</h4>
+            <p class="muted">Handles returns, warranty, shipping, and policy Qs with order lookup.</p>
+          </div>
+          <div class="card">
+            <h4>UGC + PDP Writer</h4>
+            <p class="muted">SEO‑smart descriptions, bundles, and localized copy.</p>
+          </div>
+          <div class="card">
+            <h4>Review Intelligence</h4>
+            <p class="muted">Summarizes reviews, flags CX issues, and suggests fixes.</p>
+          </div>
+        </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="features" class="features">
-      <div class="feat">
-        <h3>On‑brand tone</h3>
-        <p>We tune on your past conversations so every reply sounds like your team, not a generic bot.</p>
-      </div>
-      <div class="feat">
-        <h3>Fast + safe</h3>
-        <p>Latency‑optimized flows with guardrails. Answers in under a second for common queries.</p>
-      </div>
-      <div class="feat">
-        <h3>Setup in days</h3>
-        <p>Drop‑in widget or chat link. We handle crawling, data cleaning, and evaluation.</p>
-      </div>
-    </section>
+  <!-- SAMPLE QUERIES -->
+  <section id="queries" class="container" style="padding:24px 0 8px">
+    <h2 class="brand-gradient" style="font-size:2rem">Sample Queries</h2>
+    <div class="tabs">
+      <button class="tab active" data-tab="re">Real Estate</button>
+      <button class="tab" data-tab="ec">E‑commerce</button>
+    </div>
 
-    <footer>
-      <div>© <span id="year"></span> Apexyn. All rights reserved.</div>
-      <div>Built with ❤️ + ruthless attention to detail.</div>
-    </footer>
-  </div>
+    <div id="tab-re" class="tab-panel">
+      <div class="grid cols-3">
+        <div class="card"><h4>Discovery</h4><ul class="muted">
+          <li>Show 2BHK under ₹1.2cr in Hitec City with &lt; 5‑yr buildings.</li>
+          <li>Compare Prestige A vs My Home B: sizes, amenities, RERA, handover.</li>
+          <li>What’s the average rent yield for 3BHK in Kokapet?</li>
+        </ul></div>
+        <div class="card"><h4>Compliance & Docs</h4><ul class="muted">
+          <li>Is Plot #45 HMDA‑approved? Upload docs and verify.</li>
+          <li>Draft a site‑visit summary email to the buyer.</li>
+          <li>Create a booking checklist for NRI buyers.</li>
+        </ul></div>
+        <div class="card"><h4>Scheduling & Follow‑ups</h4><ul class="muted">
+          <li>Book a tour for Saturday 11am, 2 guests.</li>
+          <li>Send WhatsApp reminders + location pin.</li>
+          <li>Log outcome to HubSpot with notes.</li>
+        </ul></div>
+      </div>
+    </div>
+
+    <div id="tab-ec" class="tab-panel" style="display:none">
+      <div class="grid cols-3">
+        <div class="card"><h4>Buying Help</h4><ul class="muted">
+          <li>I need a travel backpack &lt; 30L that fits under-seat.</li>
+          <li>Find a vitamin C serum for dry skin under $15.</li>
+          <li>Compare iPhone 15 case options: MagSafe vs slim.</li>
+        </ul></div>
+        <div class="card"><h4>Support</h4><ul class="muted">
+          <li>Where’s my order #78423? Update ETA and SMS me.</li>
+          <li>Start a return and generate pickup label.</li>
+          <li>Apply warranty for blender – motor issue.</li>
+        </ul></div>
+        <div class="card"><h4>Content & Insights</h4><ul class="muted">
+          <li>Write PDP copy for “Merino Wool Tee”.</li>
+          <li>Summarize last 500 reviews into top 5 fixes.</li>
+          <li>Draft a bundle offer for A + B at 10% off.</li>
+        </ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEMOS -->
+  <section id="demos" class="container" style="padding:24px 0 8px">
+    <h2 class="brand-gradient" style="font-size:2rem">Live Demos (frontend only)</h2>
+    <p class="muted">Type a query to see how our agents respond. These are local demos; production versions connect to your CRM, WhatsApp, catalog, and calendars.</p>
+    <div class="grid cols-2" style="margin-top:12px">
+      <div class="card chat">
+        <h3>Real Estate Copilot</h3>
+        <div class="chat-box" id="re-chat">
+          <div class="msg bot">👋 I can answer listing specs, schedule tours, and pre‑qualify buyers.</div>
+        </div>
+        <div class="chat-controls">
+          <input id="re-input" placeholder="Ask: 2BHK under ₹1.2cr in Hitec / Schedule a tour Sat 11am"/>
+          <button onclick="sendRe()">Send</button>
+        </div>
+      </div>
+
+      <div class="card chat">
+        <h3>E‑commerce Copilot</h3>
+        <div class="chat-box" id="ec-chat">
+          <div class="msg bot">🛒 I help shoppers choose, track orders, and start returns.</div>
+        </div>
+        <div class="chat-controls">
+          <input id="ec-input" placeholder="Ask: find a 30L backpack / track order #78423 / return"/>
+          <button onclick="sendEc()">Send</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OFFERS / GUARANTEES -->
+  <section class="container" style="padding:12px 0 8px">
+    <div class="grid cols-3">
+      <div class="card">
+        <h3>Irresistible Offer</h3>
+        <p class="muted">Install + tuning in 7 days. If you’re not seeing faster responses and qualified leads by Day 14, we work free until you do.</p>
+      </div>
+      <div class="card">
+        <h3>ROI Promise</h3>
+        <p class="muted">Beat your current response time by 60% or reduce support load by 30% in the first month — or we refund our fee.</p>
+      </div>
+      <div class="card">
+        <h3>No‑Risk Pilot</h3>
+        <p class="muted">Start with a 2‑week pilot on one workflow. Keep the assets even if you don’t continue.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING (USD) -->
+  <section id="pricing" class="container" style="padding:24px 0 8px">
+    <h2 class="brand-gradient" style="font-size:2rem">Pricing (USD)</h2>
+    <div class="grid cols-3 pricing" style="margin-top:12px">
+      <div class="card">
+        <h3>Starter</h3>
+        <p class="muted">Pre‑trained vertical agent + simple web widget.</p>
+        <p class="price">$599</p>
+        <ul class="muted">
+          <li>One vertical (RE or E‑comm)</li>
+          <li>Up to 2 workflows</li>
+          <li>Email handoff</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Growth</h3>
+        <p class="muted">Fine‑tuned, CRM‑connected, WhatsApp ready.</p>
+        <p class="price">$1,499</p>
+        <ul class="muted">
+          <li>Both verticals optional</li>
+          <li>4–6 workflows + integrations</li>
+          <li>Calendar + Catalog + CRM</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Scale</h3>
+        <p class="muted">Multi‑brand, analytics, custom SLAs.</p>
+        <p class="price">Custom</p>
+        <ul class="muted">
+          <li>Unlimited workflows</li>
+          <li>Analytics + A/B</li>
+          <li>Dedicated support</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="container" style="padding:24px 0 60px">
+    <h2 class="brand-gradient" style="font-size:2rem">Get a Proposal</h2>
+    <form onsubmit="event.preventDefault(); alert('Thanks! We\'ll get back within 24h.');">
+      <div class="row">
+        <div>
+          <label>Name</label>
+          <input required placeholder="Your name" />
+        </div>
+        <div>
+          <label>Email</label>
+          <input type="email" required placeholder="you@company.com" />
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label>Company / Brand</label>
+          <input placeholder="Company / Project" />
+        </div>
+        <div>
+          <label>Vertical</label>
+          <select>
+            <option>Real Estate</option>
+            <option>E‑commerce</option>
+            <option>Both</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label>Integrations</label>
+          <input placeholder="HubSpot, Zoho, Shopify, WooCommerce, Calendly, WhatsApp API…" />
+        </div>
+        <div>
+          <label>Budget (USD)</label>
+          <select>
+            <option>$300–$600</option>
+            <option>$600–$1,500</option>
+            <option>$1,500–$5,000</option>
+            <option>$5,000+</option>
+          </select>
+        </div>
+      </div>
+      <label>Brief / Queries</label>
+      <textarea placeholder="Tell us what to automate, share links to listings/products, target outcomes, deadlines…"></textarea>
+      <div style="display:flex; gap:12px; align-items:center; margin-top:10px">
+        <input type="file" />
+        <button class="btn-primary" style="border:0; padding:12px 16px; border-radius:12px; cursor:pointer">Send Brief</button>
+      </div>
+    </form>
+  </section>
+
+  <footer>
+    <div class="container" style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px">
+      <span>© <span id="year"></span> Apexyn Automation Studio</span>
+      <span>Built with ⚡ by <span class="brand-gradient">GPT Automation</span></span>
+    </div>
+  </footer>
 
   <script>
-    // Build the background grid cells once
-    (function buildGrid(){
-      const grid = document.getElementById('grid');
-      const cols = 40, rows = 24;
-      const frag = document.createDocumentFragment();
-      for(let i=0;i<cols*rows;i++){
-        const c = document.createElement('div');
-        c.className = 'cell';
-        frag.appendChild(c);
-      }
-      grid.appendChild(frag);
-    })();
-
-    // Cursor glow follows mouse
-    const glow = document.getElementById('glow');
+    // Sticky cursor glow follows the mouse
+    const root = document.documentElement;
     window.addEventListener('pointermove', (e)=>{
-      glow.style.setProperty('--mx', e.clientX + 'px');
-      glow.style.setProperty('--my', e.clientY + 'px');
+      root.style.setProperty('--mx', e.clientX + 'px');
+      root.style.setProperty('--my', e.clientY + 'px');
     });
 
-    // Simple form handler — replace with your backend later
-    function submitLead(e){
-      e.preventDefault();
-      const email = document.getElementById('email').value.trim();
-      if(!email) return false;
-      alert('Thanks! We\'ll reach out at ' + email + ' shortly.');
-      e.target.reset();
-      return false;
+    // Tabs
+    const tabs = document.querySelectorAll('.tab');
+    tabs.forEach(t=> t.addEventListener('click', ()=>{
+      tabs.forEach(x=>x.classList.remove('active'));
+      t.classList.add('active');
+      document.querySelectorAll('.tab-panel').forEach(p=>p.style.display='none');
+      document.getElementById('tab-'+t.dataset.tab).style.display='block';
+    }));
+
+    // Demo logic (very light intent mapping)
+    function addMsg(boxId, text, who='user'){
+      const box = document.getElementById(boxId);
+      const el = document.createElement('div');
+      el.className = 'msg ' + (who==='user' ? 'user' : 'bot');
+      el.textContent = text;
+      box.appendChild(el); box.scrollTop = box.scrollHeight;
     }
 
-    // Year in footer
+    function replyRe(q){
+      const s = q.toLowerCase();
+      if(s.includes('2bhk') || s.includes('1.2cr') || s.includes('hitec')){
+        return 'Found 6 listings in Hitec City under ₹1.2cr. Top pick: MyHome Zenith 2BHK — 1,080 sqft, 2022 build, ₹98L. I can schedule a tour — what day works?';
+      }
+      if(s.includes('schedule') || s.includes('tour') || s.includes('visit')){
+        return 'Got it. Saturday 11:00 works. I can add 2 guests and share a WhatsApp reminder + location. Confirm name and number?';
+      }
+      if(s.includes('rera') || s.includes('approval') || s.includes('hmda') ){
+        return 'Upload the document or share the RERA ID and I will verify approval status and highlight any variances.';
+      }
+      return 'I can answer specs, compare projects, verify approvals, and book tours. Try: “Compare Prestige vs MyHome amenities and handover.”';
+    }
+
+    function replyEc(q){
+      const s = q.toLowerCase();
+      if(s.includes('backpack') || s.includes('30l')){
+        return 'Two options: 28L under‑seat cabin pack and a 30L rolltop with laptop sleeve. Both water‑resistant. Want a comparison table?';
+      }
+      if(s.includes('order') || s.match(/#\d{4,}/)){
+        return 'Order found. ETA: 2–3 days. I can send SMS updates or start a return if needed.';
+      }
+      if(s.includes('return')){
+        return 'Return window open. I can generate a pickup label and schedule courier tomorrow 10–1. Proceed?';
+      }
+      if(s.includes('serum') || s.includes('vitamin c')){
+        return 'For dry skin under $15: 10% LAA with squalane base or 12% MAP fragrance‑free. I can add to cart or suggest a routine.';
+      }
+      return 'I help with product picks, order tracking, returns, and PDP copy. Try: “Summarize last 500 reviews into top fixes.”';
+    }
+
+    function sendRe(){
+      const i = document.getElementById('re-input');
+      const q = i.value.trim(); if(!q) return; addMsg('re-chat', q, 'user');
+      setTimeout(()=> addMsg('re-chat', replyRe(q), 'bot'), 400);
+      i.value='';
+    }
+    function sendEc(){
+      const i = document.getElementById('ec-input');
+      const q = i.value.trim(); if(!q) return; addMsg('ec-chat', q, 'user');
+      setTimeout(()=> addMsg('ec-chat', replyEc(q), 'bot'), 400);
+      i.value='';
+    }
+
+    // Year
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>

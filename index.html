@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Apexyn Automation Studio — Real Estate & E‑commerce</title>
-  <meta name="description" content="Neon‑grid landing for Apexyn’s GPT automations in Real Estate & E‑commerce. Single‑file, plug‑and‑play." />
+  <meta name="description" content="Neon‑grid landing for Apexyn’s GPT automations in U.S. Real Estate & E‑commerce. Single‑file, plug‑and‑play." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,6 +31,12 @@
       color:var(--fg);font-family:'Inter',system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
       overflow-x:hidden;
     }
+
+    /* === Splash screen === */
+    .splash{position:fixed; inset:0; display:grid; place-items:center; background:var(--bg); z-index:1000; animation:fadeOut 1s ease 1.6s forwards}
+    .splash img{width:120px; height:auto; border-radius:16px; filter:var(--glow)}
+    .splash .brand{margin-top:14px; font-weight:800; letter-spacing:.4px}
+    @keyframes fadeOut{to{opacity:0; visibility:hidden}}
 
     /* === Neon grid background === */
     .grid-bg{position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.6;}
@@ -115,13 +121,21 @@
   </style>
 </head>
 <body>
+  <!-- Splash screen: shows your logo first, then auto-fades -->
+  <div class="splash" id="splash" aria-live="polite">
+    <!-- Put your logo file in the repo root as logo.png, or change the src path below -->
+    <div style="text-align:center">
+      <img src="logo.png" alt="Apexyn logo" />
+      <div class="brand">Apexyn</div>
+    </div>
+  </div>
+
   <div class="grid-bg"></div>
   <div class="cursor-glow" aria-hidden="true"></div>
 
   <header>
     <div class="container nav">
       <a class="logo" href="#top">
-        <!-- Use your repo's logo.png (inherits the glow) -->
         <img alt="Apexyn logo" src="logo.png" />
         <span class="brand-gradient" style="font-size:1.05rem">Apexyn</span>
       </a>
@@ -137,7 +151,7 @@
 
   <!-- HERO -->
   <section class="hero container">
-    <span class="pill"><span style="width:8px; height:8px; border-radius:50%; background:var(--brand-2); box-shadow:0 0 12px var(--brand-2)"></span> GPT Automations for Real Estate & E‑commerce</span>
+    <span class="pill"><span style="width:8px; height:8px; border-radius:50%; background:var(--brand-2); box-shadow:0 0 12px var(--brand-2)"></span> GPT Automations for U.S. Real Estate & E‑commerce</span>
     <h1 class="brand-gradient">Turn leads into revenue with fine‑tuned GPT agents</h1>
     <p>We build domain‑trained copilots that answer buyer questions, qualify leads, craft high‑converting product content, and automate ops. Neon‑clean UI. Ruthless delivery speed.</p>
     <div class="cta">
@@ -148,7 +162,7 @@
     <div class="badges">
       <span class="pill">Avg reply <strong>1.2s</strong></span>
       <span class="pill">24/7 lead capture</span>
-      <span class="pill">CRM + WhatsApp ready</span>
+      <span class="pill">CRM + SMS ready</span>
     </div>
   </section>
 
@@ -158,23 +172,23 @@
       <div class="card">
         <h3 class="brand-gradient" style="font-size:1.4rem">Top agent pain points (we crush these)</h3>
         <ul class="muted" style="margin:10px 0 0 18px">
-          <li>Leads ghost after first contact → no structured follow‑ups.</li>
-          <li>Agents waste hours answering repetitive listing questions.</li>
-          <li>Slow response on nights/weekends → lost deals to faster competitors.</li>
-          <li>Messy data: inquiries scattered across WhatsApp, email, portals.</li>
-          <li>No qualification → tours with low‑intent, low‑budget buyers.</li>
-          <li>No analytics on why deals stall (pricing, amenity gaps, paperwork).</li>
+          <li>Leads ghost after first contact → no structured text/email follow‑ups.</li>
+          <li>Hours lost answering repetitive MLS questions (HOA, taxes, schools).</li>
+          <li>Slow response nights/weekends → lose deals to faster agents.</li>
+          <li>Messy data: inquiries scattered across SMS, email, Zillow, Realtor.com.</li>
+          <li>No qualification → tours with low‑intent or unapproved buyers.</li>
+          <li>No analytics on why deals stall (pricing, contingencies, inspection).</li>
         </ul>
       </div>
       <div class="card">
         <h3 class="brand-gradient" style="font-size:1.4rem">Why Apexyn wins</h3>
         <ul class="muted" style="margin:10px 0 0 18px">
-          <li><strong>Fine‑tuned on your stock + tone</strong> so replies feel on‑brand.</li>
-          <li><strong>Lead scoring</strong> with budget/intent/timeline heuristics.</li>
-          <li><strong>Omnichannel</strong>: web widget, WhatsApp, email, and SMS.</li>
-          <li><strong>CRM sync</strong>: HubSpot, Pipedrive, Zoho. Tours auto‑scheduled.</li>
-          <li><strong>Guardrails</strong>: compliance prompts + approval checks.</li>
-          <li><strong>Launch in days</strong>, not months. We handle data, evals, and tuning.</li>
+          <li><strong>Fine‑tuned on your MLS exports + tone</strong> so replies feel on‑brand.</li>
+          <li><strong>Lead scoring</strong> using budget/ZIP/timeline + pre‑approval status.</li>
+          <li><strong>Omnichannel</strong>: web widget, SMS/iMessage, email.</li>
+          <li><strong>CRM sync</strong>: HubSpot, Pipedrive, Follow Up Boss. Tours auto‑scheduled (Google/Calendly).</li>
+          <li><strong>Guardrails</strong>: Fair‑housing friendly prompts; approval checks.</li>
+          <li><strong>Launch in days</strong>. We handle data cleaning, evaluation, and tuning.</li>
         </ul>
       </div>
     </div>
@@ -185,38 +199,38 @@
     <div class="grid cols-2">
       <div class="card">
         <h3 class="brand-gradient" style="font-size:1.4rem">Real Estate Automations</h3>
-        <p class="muted">For brokerages, developers, and portals.</p>
+        <p class="muted">For brokerages, teams, and portals.</p>
         <div class="grid cols-2" style="margin-top:12px">
           <div class="card">
             <h4>Listing Q&A Copilot</h4>
-            <p class="muted">Answers specs, locality, RERA, floor plans, mortgage, and schedules tours.</p>
+            <p class="muted">Answers HOA fees, property taxes, schools, comps, disclosures; books tours.</p>
           </div>
           <div class="card">
             <h4>Lead Qualifier</h4>
-            <p class="muted">Screens budget, intent, timeline → pushes qualified leads to CRM.</p>
+            <p class="muted">Screens budget, ZIPs, timeline, loan type (FHA/VA/Conventional) → pushes qualified leads to CRM.</p>
           </div>
           <div class="card">
             <h4>Follow‑up Drip</h4>
-            <p class="muted">WhatsApp + email sequences for no‑shows and warm leads.</p>
+            <p class="muted">SMS + email sequences for no‑shows and warm leads.</p>
           </div>
           <div class="card">
             <h4>Docs Copilot</h4>
-            <p class="muted">Auto‑draft LOIs, term sheets, and site‑visit summaries.</p>
+            <p class="muted">Auto‑draft offer summaries, tour recaps, and next‑step checklists.</p>
           </div>
         </div>
       </div>
 
       <div class="card">
         <h3 class="brand-gradient" style="font-size:1.4rem">E‑commerce Automations</h3>
-        <p class="muted">For D2C brands and marketplaces.</p>
+        <p class="muted">For U.S. DTC brands and marketplaces.</p>
         <div class="grid cols-2" style="margin-top:12px">
           <div class="card">
             <h4>Conversion Copilot</h4>
-            <p class="muted">Guides shoppers, compares SKUs, and removes purchase friction.</p>
+            <p class="muted">Guides shoppers, compares SKUs, removes purchase friction.</p>
           </div>
           <div class="card">
             <h4>Support Deflection</h4>
-            <p class="muted">Handles returns, warranty, shipping, and policy Qs with order lookup.</p>
+            <p class="muted">Handles returns, warranty, shipping and policy Qs with order lookup.</p>
           </div>
           <div class="card">
             <h4>UGC + PDP Writer</h4>
@@ -242,18 +256,18 @@
     <div id="tab-re" class="tab-panel">
       <div class="grid cols-3">
         <div class="card"><h4>Discovery</h4><ul class="muted">
-          <li>Show 2BHK under ₹1.2cr in Hitec City with &lt; 5‑yr buildings.</li>
-          <li>Compare Prestige A vs My Home B: sizes, amenities, RERA, handover.</li>
-          <li>What’s the average rent yield for 3BHK in Kokapet?</li>
+          <li>Show 2‑bed under $500k in Austin 78704, built 2019+.</li>
+          <li>Compare Lennar vs KB Home in Phoenix: HOA, schools, taxes, delivery.</li>
+          <li>What’s the average cap rate for a duplex in Tampa?</li>
         </ul></div>
         <div class="card"><h4>Compliance & Docs</h4><ul class="muted">
-          <li>Is Plot #45 HMDA‑approved? Upload docs and verify.</li>
-          <li>Draft a site‑visit summary email to the buyer.</li>
-          <li>Create a booking checklist for NRI buyers.</li>
+          <li>Is this property in a flood zone? Pull FEMA map.</li>
+          <li>Draft a tour recap email with next steps.</li>
+          <li>Create a buyer checklist for FHA loans.</li>
         </ul></div>
         <div class="card"><h4>Scheduling & Follow‑ups</h4><ul class="muted">
           <li>Book a tour for Saturday 11am, 2 guests.</li>
-          <li>Send WhatsApp reminders + location pin.</li>
+          <li>Send SMS reminders + Google Maps pin.</li>
           <li>Log outcome to HubSpot with notes.</li>
         </ul></div>
       </div>
@@ -262,18 +276,18 @@
     <div id="tab-ec" class="tab-panel" style="display:none">
       <div class="grid cols-3">
         <div class="card"><h4>Buying Help</h4><ul class="muted">
-          <li>I need a travel backpack &lt; 30L that fits under-seat.</li>
+          <li>I need a TSA‑compliant 30L backpack that fits under‑seat.</li>
           <li>Find a vitamin C serum for dry skin under $15.</li>
           <li>Compare iPhone 15 case options: MagSafe vs slim.</li>
         </ul></div>
         <div class="card"><h4>Support</h4><ul class="muted">
-          <li>Where’s my order #78423? Update ETA and SMS me.</li>
-          <li>Start a return and generate pickup label.</li>
+          <li>Where’s my order #78423? Update ETA and text me.</li>
+          <li>Start a return and generate a UPS pickup label.</li>
           <li>Apply warranty for blender – motor issue.</li>
         </ul></div>
         <div class="card"><h4>Content & Insights</h4><ul class="muted">
           <li>Write PDP copy for “Merino Wool Tee”.</li>
-          <li>Summarize last 500 reviews into top 5 fixes.</li>
+          <li>Summarize the last 500 reviews into top 5 fixes.</li>
           <li>Draft a bundle offer for A + B at 10% off.</li>
         </ul></div>
       </div>
@@ -283,7 +297,7 @@
   <!-- DEMOS -->
   <section id="demos" class="container" style="padding:24px 0 8px">
     <h2 class="brand-gradient" style="font-size:2rem">Live Demos (frontend only)</h2>
-    <p class="muted">Type a query to see how our agents respond. These are local demos; production versions connect to your CRM, WhatsApp, catalog, and calendars.</p>
+    <p class="muted">Type a query to see how our agents respond. These are local demos; production versions connect to your CRM, SMS, catalog, and calendars.</p>
     <div class="grid cols-2" style="margin-top:12px">
       <div class="card chat">
         <h3>Real Estate Copilot</h3>
@@ -291,7 +305,7 @@
           <div class="msg bot">👋 I can answer listing specs, schedule tours, and pre‑qualify buyers.</div>
         </div>
         <div class="chat-controls">
-          <input id="re-input" placeholder="Ask: 2BHK under ₹1.2cr in Hitec / Schedule a tour Sat 11am"/>
+          <input id="re-input" placeholder="Ask: 2‑bed under $500k in Austin / Schedule a tour Sat 11am"/>
           <button onclick="sendRe()">Send</button>
         </div>
       </div>
@@ -318,7 +332,7 @@
       </div>
       <div class="card">
         <h3>ROI Promise</h3>
-        <p class="muted">Beat your current response time by 60% or reduce support load by 30% in the first month — or we refund our fee.</p>
+        <p class="muted">Beat your current response time by 60% or cut support load by 30% in the first month — or we refund our fee.</p>
       </div>
       <div class="card">
         <h3>No‑Risk Pilot</h3>
@@ -343,7 +357,7 @@
       </div>
       <div class="card">
         <h3>Growth</h3>
-        <p class="muted">Fine‑tuned, CRM‑connected, WhatsApp ready.</p>
+        <p class="muted">Fine‑tuned, CRM‑connected, SMS ready.</p>
         <p class="price">$1,499</p>
         <ul class="muted">
           <li>Both verticals optional</li>
@@ -367,7 +381,7 @@
   <!-- CONTACT -->
   <section id="contact" class="container" style="padding:24px 0 60px">
     <h2 class="brand-gradient" style="font-size:2rem">Get a Proposal</h2>
-    <form onsubmit="event.preventDefault(); alert('Thanks! We\'ll get back within 24h.');">
+    <form onsubmit="event.preventDefault(); alert('Thanks! We\\'ll get back within 24h.');">
       <div class="row">
         <div>
           <label>Name</label>
@@ -395,7 +409,7 @@
       <div class="row">
         <div>
           <label>Integrations</label>
-          <input placeholder="HubSpot, Zoho, Shopify, WooCommerce, Calendly, WhatsApp API…" />
+          <input placeholder="HubSpot, Follow Up Boss, Shopify, WooCommerce, Calendly…" />
         </div>
         <div>
           <label>Budget (USD)</label>
@@ -408,7 +422,7 @@
         </div>
       </div>
       <label>Brief / Queries</label>
-      <textarea placeholder="Tell us what to automate, share links to listings/products, target outcomes, deadlines…"></textarea>
+      <textarea placeholder="Tell us what to automate, share listing/product links, target outcomes, deadlines…"></textarea>
       <div style="display:flex; gap:12px; align-items:center; margin-top:10px">
         <input type="file" />
         <button class="btn-primary" style="border:0; padding:12px 16px; border-radius:12px; cursor:pointer">Send Brief</button>
@@ -431,6 +445,12 @@
       root.style.setProperty('--my', e.clientY + 'px');
     });
 
+    // Splash: remove from DOM after fade
+    const splash = document.getElementById('splash');
+    splash.addEventListener('animationend', ()=> splash.remove());
+    // Fallback removal if animation is blocked
+    setTimeout(()=>{ if(document.getElementById('splash')) splash.remove(); }, 2500);
+
     // Tabs
     const tabs = document.querySelectorAll('.tab');
     tabs.forEach(t=> t.addEventListener('click', ()=>{
@@ -451,16 +471,16 @@
 
     function replyRe(q){
       const s = q.toLowerCase();
-      if(s.includes('2bhk') || s.includes('1.2cr') || s.includes('hitec')){
-        return 'Found 6 listings in Hitec City under ₹1.2cr. Top pick: MyHome Zenith 2BHK — 1,080 sqft, 2022 build, ₹98L. I can schedule a tour — what day works?';
+      if(s.includes('2-bed') || s.includes('500k') || s.includes('austin')){
+        return 'Found 5 listings in Austin 78704 under $500k. Top pick: Barton Hills 2‑bed — 1,020 sqft, 2019 build, $489k. I can schedule a tour — what day works?';
       }
       if(s.includes('schedule') || s.includes('tour') || s.includes('visit')){
-        return 'Got it. Saturday 11:00 works. I can add 2 guests and share a WhatsApp reminder + location. Confirm name and number?';
+        return 'Got it. Saturday 11:00 works. I can add 2 guests and text a reminder + Google Maps pin. Confirm name and number?';
       }
-      if(s.includes('rera') || s.includes('approval') || s.includes('hmda') ){
-        return 'Upload the document or share the RERA ID and I will verify approval status and highlight any variances.';
+      if(s.includes('hoa') || s.includes('tax') || s.includes('school') ){
+        return 'I can pull HOA fees, property taxes, and assigned schools from your MLS export. Share the address or MLS ID?';
       }
-      return 'I can answer specs, compare projects, verify approvals, and book tours. Try: “Compare Prestige vs MyHome amenities and handover.”';
+      return 'I can answer specs, compare builders, check flood zones, and book tours. Try: “Compare Lennar vs KB Home HOA and schools.”';
     }
 
     function replyEc(q){
@@ -468,16 +488,16 @@
       if(s.includes('backpack') || s.includes('30l')){
         return 'Two options: 28L under‑seat cabin pack and a 30L rolltop with laptop sleeve. Both water‑resistant. Want a comparison table?';
       }
-      if(s.includes('order') || s.match(/#\d{4,}/)){
-        return 'Order found. ETA: 2–3 days. I can send SMS updates or start a return if needed.';
+      if(s.includes('order') || s.match(/#\\d{4,}/)){
+        return 'Order found. ETA: 2–3 days. I can text updates or start a return if needed.';
       }
       if(s.includes('return')){
-        return 'Return window open. I can generate a pickup label and schedule courier tomorrow 10–1. Proceed?';
+        return 'Return window open. I can generate a UPS pickup label and schedule courier tomorrow 10–1. Proceed?';
       }
       if(s.includes('serum') || s.includes('vitamin c')){
         return 'For dry skin under $15: 10% LAA with squalane base or 12% MAP fragrance‑free. I can add to cart or suggest a routine.';
       }
-      return 'I help with product picks, order tracking, returns, and PDP copy. Try: “Summarize last 500 reviews into top fixes.”';
+      return 'I help with product picks, order tracking, returns, and PDP copy. Try: “Summarize the last 500 reviews into top fixes.”';
     }
 
     function sendRe(){

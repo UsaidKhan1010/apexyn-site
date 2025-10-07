@@ -3,42 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Apexyn Automation Studio — Real Estate & E‑commerce</title>
-  <meta name="description" content="Neon‑grid landing for Apexyn’s GPT automations in U.S. Real Estate & E‑commerce. Single‑file, plug‑and‑play." />
+  <title>Apexyn AI — Real Estate Chatbot That Books Tours 24/7</title>
+  <meta name="description" content="Apexyn AI: premium real-estate chatbot that answers listings, captures qualified leads, and books tours automatically. Limited launch offer: ~$399~ → $299." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root{
-      /* === BRAND: tweak these two to match your logo gradient === */
-      --brand-1:#8b5cf6;   /* neon purple */
-      --brand-2:#06b6d4;   /* cyan */
-      --brand-3:#a78bfa;   /* soft accent */
-      --bg:#0a0a0f;
-      --fg:#e6e6f0;
-      --muted:#9aa0b4;
-      --card:#0f1020;
-      --border:#23243b;
+      --brand-1:#8b5cf6; --brand-2:#06b6d4; --brand-3:#a78bfa;
+      --bg:#0a0a0f; --fg:#e6e6f0; --muted:#9aa0b4; --card:#0f1020; --border:#23243b;
       --glow: drop-shadow(0 0 18px rgba(139,92,246,.55)) drop-shadow(0 0 40px rgba(6,182,212,.35));
     }
-
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;background:radial-gradient(1200px 800px at 80% -10%, rgba(139,92,246,.18), transparent 60%),
       radial-gradient(800px 600px at 10% 110%, rgba(6,182,212,.15), transparent 60%), var(--bg);
-      color:var(--fg);font-family:'Inter',system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-      overflow-x:hidden;
+      color:var(--fg);font-family:'Inter',system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;overflow-x:hidden;
     }
-
-    /* === Splash screen === */
     .splash{position:fixed; inset:0; display:grid; place-items:center; background:var(--bg); z-index:1000; animation:fadeOut 1s ease 1.6s forwards}
     .splash img{width:120px; height:auto; border-radius:16px; filter:var(--glow)}
     .splash .brand{margin-top:14px; font-weight:800; letter-spacing:.4px}
     @keyframes fadeOut{to{opacity:0; visibility:hidden}}
 
-    /* === Neon grid background === */
     .grid-bg{position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.6;}
     .grid-bg::before{content:"";position:absolute;inset:-200vh; background:
       repeating-linear-gradient( to right, rgba(255,255,255,.06) 0 1px, transparent 1px 100px),
@@ -47,7 +35,6 @@
       filter: drop-shadow(0 0 15px rgba(139,92,246,.35)) drop-shadow(0 0 30px rgba(6,182,212,.25));
     }
 
-    /* Cursor reactive glow */
     .cursor-glow{position:fixed;inset:-10%; pointer-events:none; z-index:0;}
     .cursor-glow::before{
       content:""; position:absolute; width:42vmax; height:42vmax; border-radius:50%;
@@ -69,16 +56,13 @@
     .nav a.btn{padding:.6rem .9rem; border:1px solid var(--border); border-radius:12px}
     .btn-primary{background:linear-gradient(90deg,var(--brand-1),var(--brand-2)); color:#0a0a0f; font-weight:700}
 
-    /* Hero */
     .hero{position:relative; padding:80px 0 40px}
     .hero h1{font-size: clamp(2rem, 3.5vw + .8rem, 4.2rem); line-height:1.05; margin:14px 0}
     .hero p{color:var(--muted); font-size: clamp(1rem, .8vw + .6rem, 1.25rem)}
     .hero .cta{display:flex; gap:12px; margin-top:22px; flex-wrap:wrap}
     .hero .cta .btn{padding:12px 16px; border-radius:12px; border:1px solid var(--border); background:#111328}
-
     .badges{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
 
-    /* Cards */
     .grid{display:grid; gap:18px}
     .cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
     .cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -93,12 +77,10 @@
     .card h3{margin:.2rem 0 .4rem 0}
     .muted{color:var(--muted)}
 
-    /* Tabs for Sample Queries */
     .tabs{display:flex; gap:8px; margin:18px 0}
     .tab{padding:.55rem .9rem; border:1px solid var(--border); border-radius:999px; background:#0f1020; cursor:pointer}
     .tab.active{background:linear-gradient(90deg,var(--brand-1),var(--brand-2)); color:#081018; font-weight:700}
 
-    /* Demo chat widgets */
     .chat{display:flex; flex-direction:column; gap:10px}
     .chat-box{height:260px; overflow:auto; background:#0b0c1a; border:1px solid var(--border); border-radius:14px; padding:12px}
     .msg{padding:10px 12px; border-radius:12px; margin:6px 0; max-width:88%}
@@ -108,22 +90,18 @@
     .chat-controls input{flex:1; padding:12px; background:#0f1020; border:1px solid var(--border); border-radius:12px; color:var(--fg)}
     .chat-controls button{padding:12px 14px; border-radius:12px; border:1px solid var(--border); background:linear-gradient(90deg,var(--brand-1),var(--brand-2)); color:#081018; font-weight:700}
 
-    /* Pricing */
     .pricing .price{font-size:2rem; font-weight:800}
 
-    /* Forms */
     form .row{display:grid; gap:12px; grid-template-columns:repeat(2,minmax(0,1fr))}
     @media (max-width: 720px){ form .row{grid-template-columns:1fr} }
-    input, select, textarea{width:100%; padding:12px 14px; border-radius:12px; border:1px solid var(--border); background:#0f1020; color:var(--fg)}
+    input, select, textarea{width:100%; padding:12px 14px; border-radius:12px; border:1px solid var(--border); background:#0f1020; color:#e6e6f0}
     textarea{min-height:140px}
 
     footer{border-top:1px solid rgba(255,255,255,.06); padding:26px 0; color:var(--muted)}
   </style>
 </head>
 <body>
-  <!-- Splash screen: shows your logo first, then auto-fades -->
   <div class="splash" id="splash" aria-live="polite">
-    <!-- Put your logo file in the repo root as logo.png, or change the src path below -->
     <div style="text-align:center">
       <img src="logo.png" alt="Apexyn logo" />
       <div class="brand">Apexyn</div>
@@ -142,7 +120,7 @@
       <nav style="display:flex; gap:10px; align-items:center">
         <a href="#solutions" class="btn">Solutions</a>
         <a href="#pain" class="btn">Agent Pain Points</a>
-        <a href="#demos" class="btn">Live Demos</a>
+        <a href="#demos" class="btn">Live Demo</a>
         <a href="#pricing" class="btn">Pricing</a>
         <a href="#contact" class="btn btn-primary">Get Proposal</a>
       </nav>
@@ -151,18 +129,18 @@
 
   <!-- HERO -->
   <section class="hero container">
-    <span class="pill"><span style="width:8px; height:8px; border-radius:50%; background:var(--brand-2); box-shadow:0 0 12px var(--brand-2)"></span> GPT Automations for U.S. Real Estate & E‑commerce</span>
-    <h1 class="brand-gradient">Turn leads into revenue with fine‑tuned GPT agents</h1>
-    <p>We build domain‑trained copilots that answer buyer questions, qualify leads, craft high‑converting product content, and automate ops. Neon‑clean UI. Ruthless delivery speed.</p>
+    <span class="pill"><span style="width:8px; height:8px; border-radius:50%; background:var(--brand-2); box-shadow:0 0 12px var(--brand-2)"></span> Real-Estate AI that works while you sleep</span>
+    <h1 class="brand-gradient">Turn website visitors into qualified tours — automatically</h1>
+    <p>Apexyn AI answers listing questions instantly, captures buyer details, and books viewings 24/7. Save serious time, stop losing leads after hours, and close more deals without hiring extra staff.</p>
     <div class="cta">
-      <a href="#demos" class="btn btn-primary">Try Live Demos</a>
-      <a href="#pricing" class="btn">See Pricing</a>
-      <a href="#contact" class="btn">Book a 15‑min Fit Call</a>
+      <a href="YOUR_DEMO_LINK_HERE" class="btn btn-primary">Try the Live Demo</a>
+      <a href="#pricing" class="btn">Limited-Time Pricing</a>
+      <a href="#contact" class="btn">Book a 15-min Fit Call</a>
     </div>
     <div class="badges">
-      <span class="pill">Avg reply <strong>1.2s</strong></span>
-      <span class="pill">24/7 lead capture</span>
-      <span class="pill">CRM + SMS ready</span>
+      <span class="pill">Save <strong>10–20 hrs/week</strong></span>
+      <span class="pill">Cut missed leads by <strong>60%</strong></span>
+      <span class="pill">Avg reply <strong>≈1s</strong></span>
     </div>
   </section>
 
@@ -170,25 +148,25 @@
   <section id="pain" class="container" style="padding:18px 0 6px">
     <div class="grid cols-2">
       <div class="card">
-        <h3 class="brand-gradient" style="font-size:1.4rem">Top agent pain points (we crush these)</h3>
+        <h3 class="brand-gradient" style="font-size:1.4rem">Top agent pain points (we fix these fast)</h3>
         <ul class="muted" style="margin:10px 0 0 18px">
-          <li>Leads ghost after first contact → no structured text/email follow‑ups.</li>
-          <li>Hours lost answering repetitive MLS questions (HOA, taxes, schools).</li>
-          <li>Slow response nights/weekends → lose deals to faster agents.</li>
-          <li>Messy data: inquiries scattered across SMS, email, Zillow, Realtor.com.</li>
-          <li>No qualification → tours with low‑intent or unapproved buyers.</li>
-          <li>No analytics on why deals stall (pricing, contingencies, inspection).</li>
+          <li>Leads ghost after first contact → no structured SMS/email follow-ups.</li>
+          <li>Hours wasted on repetitive MLS questions (HOA, taxes, schools, comps).</li>
+          <li>Slow response on nights/weekends → lost deals to faster agents.</li>
+          <li>Scattered inquiries across SMS, email, portals → no clean pipeline.</li>
+          <li>No qualification → time spent on low-intent or unapproved buyers.</li>
+          <li>No visibility into bottlenecks (budget, timeline, contingencies).</li>
         </ul>
       </div>
       <div class="card">
-        <h3 class="brand-gradient" style="font-size:1.4rem">Why Apexyn wins</h3>
+        <h3 class="brand-gradient" style="font-size:1.4rem">Why teams choose Apexyn</h3>
         <ul class="muted" style="margin:10px 0 0 18px">
-          <li><strong>Fine‑tuned on your MLS exports + tone</strong> so replies feel on‑brand.</li>
-          <li><strong>Lead scoring</strong> using budget/ZIP/timeline + pre‑approval status.</li>
-          <li><strong>Omnichannel</strong>: web widget, SMS/iMessage, email.</li>
-          <li><strong>CRM sync</strong>: HubSpot, Pipedrive, Follow Up Boss. Tours auto‑scheduled (Google/Calendly).</li>
-          <li><strong>Guardrails</strong>: Fair‑housing friendly prompts; approval checks.</li>
-          <li><strong>Launch in days</strong>. We handle data cleaning, evaluation, and tuning.</li>
+          <li><strong>Human-like responses</strong> fine-tuned on your tone + listings.</li>
+          <li><strong>Lead scoring</strong> by budget / ZIP / timeline / pre-approval.</li>
+          <li><strong>Omnichannel</strong>: website widget, SMS/iMessage, email.</li>
+          <li><strong>Instant logging</strong> to Google Sheets or CRM (HubSpot, FUB, Pipedrive).</li>
+          <li><strong>Tours auto-scheduled</strong> via Google Calendar / Calendly.</li>
+          <li><strong>Launch in days.</strong> We handle data cleanup and setup end-to-end.</li>
         </ul>
       </div>
     </div>
@@ -198,31 +176,31 @@
   <section id="solutions" class="container" style="padding:36px 0 14px">
     <div class="grid cols-2">
       <div class="card">
-        <h3 class="brand-gradient" style="font-size:1.4rem">Real Estate Automations</h3>
-        <p class="muted">For brokerages, teams, and portals.</p>
+        <h3 class="brand-gradient" style="font-size:1.4rem">Real-Estate Automations</h3>
+        <p class="muted">For brokerages, teams, and independent agents.</p>
         <div class="grid cols-2" style="margin-top:12px">
           <div class="card">
             <h4>Listing Q&A Copilot</h4>
-            <p class="muted">Answers HOA fees, property taxes, schools, comps, disclosures; books tours.</p>
+            <p class="muted">Answers HOA fees, taxes, schools, comps, disclosures; books tours instantly.</p>
           </div>
           <div class="card">
             <h4>Lead Qualifier</h4>
-            <p class="muted">Screens budget, ZIPs, timeline, loan type (FHA/VA/Conventional) → pushes qualified leads to CRM.</p>
+            <p class="muted">Captures name, email, phone, budget, ZIPs, and timeline → pushes qualified leads.</p>
           </div>
           <div class="card">
-            <h4>Follow‑up Drip</h4>
-            <p class="muted">SMS + email sequences for no‑shows and warm leads.</p>
+            <h4>Follow-up Drip</h4>
+            <p class="muted">Automated text + email sequences that revive “ghosted” prospects.</p>
           </div>
           <div class="card">
             <h4>Docs Copilot</h4>
-            <p class="muted">Auto‑draft offer summaries, tour recaps, and next‑step checklists.</p>
+            <p class="muted">Tour recaps, offer summaries, and next-step checklists — done for you.</p>
           </div>
         </div>
       </div>
 
       <div class="card">
-        <h3 class="brand-gradient" style="font-size:1.4rem">E‑commerce Automations</h3>
-        <p class="muted">For U.S. DTC brands and marketplaces.</p>
+        <h3 class="brand-gradient" style="font-size:1.4rem">E-commerce (optional)</h3>
+        <p class="muted">If you also sell to DTC brands.</p>
         <div class="grid cols-2" style="margin-top:12px">
           <div class="card">
             <h4>Conversion Copilot</h4>
@@ -230,15 +208,15 @@
           </div>
           <div class="card">
             <h4>Support Deflection</h4>
-            <p class="muted">Handles returns, warranty, shipping and policy Qs with order lookup.</p>
+            <p class="muted">Returns, warranty, shipping, policy Qs with order lookup.</p>
           </div>
           <div class="card">
             <h4>UGC + PDP Writer</h4>
-            <p class="muted">SEO‑smart descriptions, bundles, and localized copy.</p>
+            <p class="muted">SEO-smart descriptions and localized copy in minutes.</p>
           </div>
           <div class="card">
             <h4>Review Intelligence</h4>
-            <p class="muted">Summarizes reviews, flags CX issues, and suggests fixes.</p>
+            <p class="muted">Summarizes reviews, flags CX issues, suggests fixes.</p>
           </div>
         </div>
       </div>
@@ -250,13 +228,13 @@
     <h2 class="brand-gradient" style="font-size:2rem">Sample Queries</h2>
     <div class="tabs">
       <button class="tab active" data-tab="re">Real Estate</button>
-      <button class="tab" data-tab="ec">E‑commerce</button>
+      <button class="tab" data-tab="ec">E-commerce</button>
     </div>
 
     <div id="tab-re" class="tab-panel">
       <div class="grid cols-3">
         <div class="card"><h4>Discovery</h4><ul class="muted">
-          <li>Show 2‑bed under $500k in Austin 78704, built 2019+.</li>
+          <li>Show 2-bed under $500k in Austin 78704, built 2019+.</li>
           <li>Compare Lennar vs KB Home in Phoenix: HOA, schools, taxes, delivery.</li>
           <li>What’s the average cap rate for a duplex in Tampa?</li>
         </ul></div>
@@ -265,7 +243,7 @@
           <li>Draft a tour recap email with next steps.</li>
           <li>Create a buyer checklist for FHA loans.</li>
         </ul></div>
-        <div class="card"><h4>Scheduling & Follow‑ups</h4><ul class="muted">
+        <div class="card"><h4>Scheduling & Follow-ups</h4><ul class="muted">
           <li>Book a tour for Saturday 11am, 2 guests.</li>
           <li>Send SMS reminders + Google Maps pin.</li>
           <li>Log outcome to HubSpot with notes.</li>
@@ -276,7 +254,7 @@
     <div id="tab-ec" class="tab-panel" style="display:none">
       <div class="grid cols-3">
         <div class="card"><h4>Buying Help</h4><ul class="muted">
-          <li>I need a TSA‑compliant 30L backpack that fits under‑seat.</li>
+          <li>I need a TSA-compliant 30L backpack that fits under-seat.</li>
           <li>Find a vitamin C serum for dry skin under $15.</li>
           <li>Compare iPhone 15 case options: MagSafe vs slim.</li>
         </ul></div>
@@ -296,22 +274,22 @@
 
   <!-- DEMOS -->
   <section id="demos" class="container" style="padding:24px 0 8px">
-    <h2 class="brand-gradient" style="font-size:2rem">Live Demos (frontend only)</h2>
-    <p class="muted">Type a query to see how our agents respond. These are local demos; production versions connect to your CRM, SMS, catalog, and calendars.</p>
+    <h2 class="brand-gradient" style="font-size:2rem">Live Demo</h2>
+    <p class="muted">Type a query to see how our agent responds. Production versions connect to your CRM, SMS, and calendars.</p>
     <div class="grid cols-2" style="margin-top:12px">
       <div class="card chat">
-        <h3>Real Estate Copilot</h3>
+        <h3>Real-Estate Copilot</h3>
         <div class="chat-box" id="re-chat">
-          <div class="msg bot">👋 I can answer listing specs, schedule tours, and pre‑qualify buyers.</div>
+          <div class="msg bot">👋 I answer listing specs, schedule tours, and pre-qualify buyers.</div>
         </div>
         <div class="chat-controls">
-          <input id="re-input" placeholder="Ask: 2‑bed under $500k in Austin / Schedule a tour Sat 11am"/>
+          <input id="re-input" placeholder="Ask: 2-bed under $500k in Austin / Schedule a tour Sat 11am"/>
           <button onclick="sendRe()">Send</button>
         </div>
       </div>
 
       <div class="card chat">
-        <h3>E‑commerce Copilot</h3>
+        <h3>E-commerce Copilot</h3>
         <div class="chat-box" id="ec-chat">
           <div class="msg bot">🛒 I help shoppers choose, track orders, and start returns.</div>
         </div>
@@ -327,51 +305,53 @@
   <section class="container" style="padding:12px 0 8px">
     <div class="grid cols-3">
       <div class="card">
-        <h3>Irresistible Offer</h3>
-        <p class="muted">Install + tuning in 7 days. If you’re not seeing faster responses and qualified leads by Day 14, we work free until you do.</p>
+        <h3>Limited-Time Launch</h3>
+        <p class="muted">First 10 teams get the full setup for <strong>$299</strong> (normally <span style="text-decoration:line-through; opacity:.7">$399</span>). Price reverts after the first 10 slots — don’t miss it.</p>
       </div>
       <div class="card">
-        <h3>ROI Promise</h3>
-        <p class="muted">Beat your current response time by 60% or cut support load by 30% in the first month — or we refund our fee.</p>
+        <h3>Save Time & Money</h3>
+        <p class="muted">Agents save <strong>10–20 hours/week</strong> on repetitive Q&A and follow-ups, while the bot books more tours — it pays for itself.</p>
       </div>
       <div class="card">
-        <h3>No‑Risk Pilot</h3>
-        <p class="muted">Start with a 2‑week pilot on one workflow. Keep the assets even if you don’t continue.</p>
+        <h3>No-Risk Pilot</h3>
+        <p class="muted">If you’re not seeing faster responses and qualified leads by Day 14, we keep working at no extra cost until you do.</p>
       </div>
     </div>
   </section>
 
-  <!-- PRICING (USD) -->
+  <!-- PRICING -->
   <section id="pricing" class="container" style="padding:24px 0 8px">
     <h2 class="brand-gradient" style="font-size:2rem">Pricing (USD)</h2>
     <div class="grid cols-3 pricing" style="margin-top:12px">
       <div class="card">
-        <h3>Starter</h3>
-        <p class="muted">Pre‑trained vertical agent + simple web widget.</p>
-        <p class="price">$599</p>
+        <h3>Launch Package</h3>
+        <p class="muted">Everything you need to start capturing leads this week.</p>
+        <p class="price"><span style="text-decoration:line-through; opacity:.6">$399</span> → $299</p>
         <ul class="muted">
-          <li>One vertical (RE or E‑comm)</li>
-          <li>Up to 2 workflows</li>
-          <li>Email handoff</li>
+          <li>Branded chatbot setup (web widget)</li>
+          <li>Listing data integration</li>
+          <li>Google Sheets / CRM logging</li>
+          <li>Tour booking via Calendar/Calendly</li>
+          <li>1-on-1 onboarding</li>
         </ul>
       </div>
       <div class="card">
-        <h3>Growth</h3>
-        <p class="muted">Fine‑tuned, CRM‑connected, SMS ready.</p>
-        <p class="price">$1,499</p>
+        <h3>Growth (Coming Soon)</h3>
+        <p class="muted">Advanced automations & SMS. Join the waitlist.</p>
+        <p class="price">—</p>
         <ul class="muted">
-          <li>Both verticals optional</li>
-          <li>4–6 workflows + integrations</li>
-          <li>Calendar + Catalog + CRM</li>
+          <li>Multi-channel (SMS/iMessage)</li>
+          <li>Deeper CRM workflows</li>
+          <li>A/B response analytics</li>
         </ul>
       </div>
       <div class="card">
-        <h3>Scale</h3>
-        <p class="muted">Multi‑brand, analytics, custom SLAs.</p>
+        <h3>Scale (Custom)</h3>
+        <p class="muted">For multi-brand teams with SLAs.</p>
         <p class="price">Custom</p>
         <ul class="muted">
           <li>Unlimited workflows</li>
-          <li>Analytics + A/B</li>
+          <li>Custom data connectors</li>
           <li>Dedicated support</li>
         </ul>
       </div>
@@ -381,7 +361,7 @@
   <!-- CONTACT -->
   <section id="contact" class="container" style="padding:24px 0 60px">
     <h2 class="brand-gradient" style="font-size:2rem">Get a Proposal</h2>
-    <form onsubmit="event.preventDefault(); alert('Thanks! We\\'ll get back within 24h.');">
+    <form onsubmit="event.preventDefault(); window.location='mailto:hello@apexyn.site'; alert('Thanks! We\\'ll get back within 24h.');">
       <div class="row">
         <div>
           <label>Name</label>
@@ -401,7 +381,7 @@
           <label>Vertical</label>
           <select>
             <option>Real Estate</option>
-            <option>E‑commerce</option>
+            <option>E-commerce</option>
             <option>Both</option>
           </select>
         </div>
@@ -409,12 +389,12 @@
       <div class="row">
         <div>
           <label>Integrations</label>
-          <input placeholder="HubSpot, Follow Up Boss, Shopify, WooCommerce, Calendly…" />
+          <input placeholder="HubSpot, Follow Up Boss, Calendly, Google Sheets…" />
         </div>
         <div>
           <label>Budget (USD)</label>
           <select>
-            <option>$300–$600</option>
+            <option>$299 (Launch offer)</option>
             <option>$600–$1,500</option>
             <option>$1,500–$5,000</option>
             <option>$5,000+</option>
@@ -422,7 +402,7 @@
         </div>
       </div>
       <label>Brief / Queries</label>
-      <textarea placeholder="Tell us what to automate, share listing/product links, target outcomes, deadlines…"></textarea>
+      <textarea placeholder="What do you want to automate? Share listing links, target ZIPs, outcomes, deadlines…"></textarea>
       <div style="display:flex; gap:12px; align-items:center; margin-top:10px">
         <input type="file" />
         <button class="btn-primary" style="border:0; padding:12px 16px; border-radius:12px; cursor:pointer">Send Brief</button>
@@ -432,26 +412,26 @@
 
   <footer>
     <div class="container" style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px">
-      <span>© <span id="year"></span> Apexyn Automation Studio</span>
-      <span>Built with ⚡ by <span class="brand-gradient">GPT Automation</span></span>
+      <span>© <span id="year"></span> Apexyn AI</span>
+      <span>Built with ⚡ by <span class="brand-gradient">Apexyn Automation</span> — <a href="mailto:hello@apexyn.site">hello@apexyn.site</a> |
+        <a href="/privacy-policy/">Privacy</a> ·
+        <a href="/terms-and-conditions/">Terms</a> ·
+        <a href="/refund-policy/">Refunds</a> ·
+        <a href="/contact/">Contact</a>
+      </span>
     </div>
   </footer>
 
   <script>
-    // Sticky cursor glow follows the mouse
     const root = document.documentElement;
     window.addEventListener('pointermove', (e)=>{
       root.style.setProperty('--mx', e.clientX + 'px');
       root.style.setProperty('--my', e.clientY + 'px');
     });
-
-    // Splash: remove from DOM after fade
     const splash = document.getElementById('splash');
     splash.addEventListener('animationend', ()=> splash.remove());
-    // Fallback removal if animation is blocked
     setTimeout(()=>{ if(document.getElementById('splash')) splash.remove(); }, 2500);
 
-    // Tabs
     const tabs = document.querySelectorAll('.tab');
     tabs.forEach(t=> t.addEventListener('click', ()=>{
       tabs.forEach(x=>x.classList.remove('active'));
@@ -460,7 +440,6 @@
       document.getElementById('tab-'+t.dataset.tab).style.display='block';
     }));
 
-    // Demo logic (very light intent mapping)
     function addMsg(boxId, text, who='user'){
       const box = document.getElementById(boxId);
       const el = document.createElement('div');
@@ -468,11 +447,10 @@
       el.textContent = text;
       box.appendChild(el); box.scrollTop = box.scrollHeight;
     }
-
     function replyRe(q){
       const s = q.toLowerCase();
       if(s.includes('2-bed') || s.includes('500k') || s.includes('austin')){
-        return 'Found 5 listings in Austin 78704 under $500k. Top pick: Barton Hills 2‑bed — 1,020 sqft, 2019 build, $489k. I can schedule a tour — what day works?';
+        return 'Found 5 listings in Austin 78704 under $500k. Top pick: Barton Hills 2-bed — 1,020 sqft, 2019 build, $489k. I can schedule a tour — what day works?';
       }
       if(s.includes('schedule') || s.includes('tour') || s.includes('visit')){
         return 'Got it. Saturday 11:00 works. I can add 2 guests and text a reminder + Google Maps pin. Confirm name and number?';
@@ -482,38 +460,25 @@
       }
       return 'I can answer specs, compare builders, check flood zones, and book tours. Try: “Compare Lennar vs KB Home HOA and schools.”';
     }
-
     function replyEc(q){
       const s = q.toLowerCase();
       if(s.includes('backpack') || s.includes('30l')){
-        return 'Two options: 28L under‑seat cabin pack and a 30L rolltop with laptop sleeve. Both water‑resistant. Want a comparison table?';
+        return 'Two options: 28L under-seat cabin pack and a 30L rolltop with laptop sleeve. Both water-resistant. Want a comparison table?';
       }
-      if(s.includes('order') || s.match(/#\\d{4,}/)){
+      if(s.includes('order') || s.match(/#\d{4,}/)){
         return 'Order found. ETA: 2–3 days. I can text updates or start a return if needed.';
       }
       if(s.includes('return')){
         return 'Return window open. I can generate a UPS pickup label and schedule courier tomorrow 10–1. Proceed?';
       }
       if(s.includes('serum') || s.includes('vitamin c')){
-        return 'For dry skin under $15: 10% LAA with squalane base or 12% MAP fragrance‑free. I can add to cart or suggest a routine.';
+        return 'For dry skin under $15: 10% LAA with squalane base or 12% MAP fragrance-free. I can add to cart or suggest a routine.';
       }
       return 'I help with product picks, order tracking, returns, and PDP copy. Try: “Summarize the last 500 reviews into top fixes.”';
     }
+    function sendRe(){ const i = document.getElementById('re-input'); const q = i.value.trim(); if(!q) return; addMsg('re-chat', q, 'user'); setTimeout(()=> addMsg('re-chat', replyRe(q), 'bot'), 400); i.value=''; }
+    function sendEc(){ const i = document.getElementById('ec-input'); const q = i.value.trim(); if(!q) return; addMsg('ec-chat', q, 'user'); setTimeout(()=> addMsg('ec-chat', replyEc(q), 'bot'), 400); i.value=''; }
 
-    function sendRe(){
-      const i = document.getElementById('re-input');
-      const q = i.value.trim(); if(!q) return; addMsg('re-chat', q, 'user');
-      setTimeout(()=> addMsg('re-chat', replyRe(q), 'bot'), 400);
-      i.value='';
-    }
-    function sendEc(){
-      const i = document.getElementById('ec-input');
-      const q = i.value.trim(); if(!q) return; addMsg('ec-chat', q, 'user');
-      setTimeout(()=> addMsg('ec-chat', replyEc(q), 'bot'), 400);
-      i.value='';
-    }
-
-    // Year
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>

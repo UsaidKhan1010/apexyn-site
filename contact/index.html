@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Contact — Apexyn AI</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Contact Apexyn AI for sales and support.">
+<style>
+  body{margin:0;background:#0a0a0f;color:#e6e6f0;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.6}
+  .wrap{max-width:900px;margin:40px auto;padding:0 18px}
+  a{color:#7dd3fc;text-decoration:none}
+  h1{background:linear-gradient(90deg,#8b5cf6,#06b6d4);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:2rem;margin:.2rem 0 1rem}
+  .muted{color:#9aa0b4}
+  .box{background:#0f1020;border:1px solid #23243b;border-radius:12px;padding:16px}
+  input,textarea{width:100%;padding:12px;border-radius:10px;border:1px solid #23243b;background:#0f1020;color:#e6e6f0}
+  button{padding:12px 16px;border-radius:10px;border:1px solid #23243b;background:linear-gradient(90deg,#8b5cf6,#06b6d4);color:#081018;font-weight:700;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Contact</h1>
+  <p class="muted">We usually reply within 24 hours.</p>
+
+  <div class="box">
+    <p><strong>Email:</strong> <a href="mailto:hello@apexyn.site">hello@apexyn.site</a><br>
+       <strong>Demo:</strong> <a href="https://YOUR_DEMO_LINK_HERE" target="_blank" rel="noopener">Try the live demo</a></p>
+  </div>
+
+  <div class="box" style="margin-top:16px">
+    <form onsubmit="event.preventDefault(); window.location='mailto:hello@apexyn.site'; alert('Thanks! We\\'ll get back within 24h.');">
+      <label>Name</label>
+      <input required placeholder="Your name">
+      <label style="margin-top:10px">Email</label>
+      <input type="email" required placeholder="you@company.com">
+      <label style="margin-top:10px">Message</label>
+      <textarea rows="6" placeholder="Tell us what you want to automate…"></textarea>
+      <div style="margin-top:12px"><button>Send</button></div>
+    </form>
+  </div>
+
+  <p style="margin-top:16px"><a href="/">← Back to Home</a></p>
+</div>
+</body>
+</html>
